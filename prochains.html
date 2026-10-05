@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Barak — Prochains évènements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; background:#F2EDE6; }
+  body { font-family:'Space Mono',ui-monospace,monospace; color:#111; padding:2px 2px 6px; }
+  * { box-sizing:border-box; }
+  .lb-label { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#777; margin:0 0 10px; }
+  .lb-next { display:grid; grid-template-columns:64px 1fr auto; gap:14px; align-items:center;
+    padding:12px 0; border-top:2px solid #111; }
+  .lb-next:last-child { border-bottom:2px solid #111; }
+  .lb-d { align-self:stretch; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    font-family:'Anton',Impact,'Arial Narrow',sans-serif; line-height:.95; text-align:center; padding:8px 3px; min-height:64px; }
+  .lb-d .j, .lb-d .m { font-size:24px; } .lb-d .j.r { font-size:17px; }
+  .lb-t { font-family:'Anton',Impact,'Arial Narrow',sans-serif; font-size:21px; line-height:1.05; text-transform:uppercase; }
+  .lb-s { display:block; margin-top:4px; font-family:'Space Mono',monospace; font-size:11px; text-transform:none; letter-spacing:.02em; }
+  .lb-q { margin:5px 0 0; font-size:11.5px; line-height:1.4; }
+  .lb-b { font-family:'Anton',Impact,sans-serif; font-size:14px; letter-spacing:.06em; text-transform:uppercase; text-decoration:none;
+    background:#111; color:#F2EDE6; border:3px solid #111; padding:8px 16px; white-space:nowrap; transition:background .15s, border-color .15s; }
+  .lb-b:hover, .lb-b:focus-visible { background:#1B35D9; border-color:#1B35D9; }
+  .lb-vide { font-size:13px; line-height:1.6; }
+  @media (max-width:420px) {
+    .lb-next { grid-template-columns:56px 1fr; }
+    .lb-b { grid-column:2; justify-self:start; }
+  }
+</style>
+</head>
+<body>
+<p class="lb-label">Prochains évènements</p>
+<div id="lb-next"></div>
+
+<script>
+(function () {
+  var EVENTS = [{"j": "07", "m": "11", "c": "ROUGE", "titre": "L'Indigène", "sous": "Concert slam · Soirée partage", "quand": "Samedi 7 novembre 2026", "link": "https://www.helloasso.com/associations/la-barak-le-lieu/evenements/l-indigene-concert-slam-et-open-mic", "debut": "2026-11-07", "fin": "2026-11-07"}, {"j": "15", "m": "11", "c": "ROUGE", "titre": "Soirée Étincelle", "sous": "Soirée partage · Cie Terre de Feu", "quand": "Dimanche 15 novembre 2026 · 19h30", "link": "", "debut": "2026-11-15", "fin": "2026-11-15"}, {"j": "25", "m": "11", "c": "BLEU", "titre": "Poupées des cavernes #1", "sous": "Voix militantes · Lectures féministes", "quand": "Mercredi 25 novembre 2026 · 19h30", "link": "", "debut": "2026-11-25", "fin": "2026-11-25"}, {"j": "04", "m": "12", "c": "LIME", "titre": "Queer Quiet Club #2", "sous": "Voix militantes · Drag", "quand": "Vendredi 4 décembre 2026 · 19h30", "link": "", "debut": "2026-12-04", "fin": "2026-12-04"}, {"j": "05–06", "m": "12", "range": 1, "c": "LIME", "titre": "Atelier d'écriture", "sous": "Workshop · avec Joncha", "quand": "Samedi 5 et dimanche 6 décembre 2026 · 10h–17h", "link": "", "debut": "2026-12-05", "fin": "2026-12-06"}, {"j": "11", "m": "12", "c": "NOIR", "titre": "Ce jour où la nuit est tombée", "sous": "Lecture · Cie Irrésistance", "quand": "Vendredi 11 décembre 2026 · 19h30", "link": "", "debut": "2026-12-11", "fin": "2026-12-11"}, {"j": "08→17", "m": "01", "range": 1, "c": "ROUGE", "titre": "Exposition « À vue »", "sous": "Photographie · Lou Cardonnel", "quand": "Du vendredi 8 au dimanche 17 janvier 2027", "link": "", "debut": "2027-01-08", "fin": "2027-01-17"}, {"j": "08", "m": "01", "c": "ROUGE", "titre": "Vernissage & carte blanche à la Cie La Barak", "sous": "Exposition « À vue » de Lou Cardonnel · Lecture", "quand": "Vendredi 8 janvier 2027 · 19h30", "link": "", "debut": "2027-01-08", "fin": "2027-01-08"}, {"j": "16", "m": "01", "c": "LIME", "titre": "Même si ça change demain", "sous": "Sortie de chantier · Cie Koikil", "quand": "Samedi 16 janvier 2027 · 14h30 et 19h30", "link": "", "debut": "2027-01-16", "fin": "2027-01-16"}, {"j": "30–31", "m": "01", "range": 1, "c": "NOIR", "titre": "Atelier d'écriture", "sous": "Workshop · avec Coralie Nonnenmacher-Guérin", "quand": "Samedi 30 et dimanche 31 janvier 2027 · 10h–17h", "link": "", "debut": "2027-01-30", "fin": "2027-01-31"}, {"j": "27–28", "m": "02", "range": 1, "c": "BLEU", "titre": "Théâtre baroque", "sous": "Workshop · avec Maxime Peloso, Cie Rossa Rossa", "quand": "Samedi 27 et dimanche 28 février 2027 · 14h–20h", "link": "", "debut": "2027-02-27", "fin": "2027-02-28"}, {"j": "05", "m": "03", "c": "BLEU", "titre": "Soirée Étincelle", "sous": "Soirée partage · Cie Terre de Feu", "quand": "Vendredi 5 mars 2027 · 19h30", "link": "", "debut": "2027-03-05", "fin": "2027-03-05"}];
+  var COULEURS = { ROUGE:['#E8412B','#F2EDE6'], BLEU:['#1B35D9','#F2EDE6'], LIME:['#B9D73E','#111111'], NOIR:['#111111','#F2EDE6'] };
+  var PROGRAMME = 'https://labarak-lelieu.fr/#programme';
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  var d = new Date();
+  var aujourdhui = d.getFullYear() + '-' + ('0'+(d.getMonth()+1)).slice(-2) + '-' + ('0'+d.getDate()).slice(-2);
+  var prochains = EVENTS.filter(function (e) { return e.fin >= aujourdhui; })
+    .sort(function (a, b) { return a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0; })
+    .slice(0, 3);
+
+  var root = document.getElementById('lb-next');
+  if (!prochains.length) {
+    root.innerHTML = '<p class="lb-vide">La saison est terminée, rendez-vous très vite pour la suivante !</p>';
+  } else {
+    root.innerHTML = prochains.map(function (e) {
+      var c = COULEURS[e.c] || COULEURS.NOIR;
+      var atelier = /^(Atelier|Théâtre baroque)/.test(e.titre);
+      var btn = e.link
+        ? '<a class="lb-b" href="' + esc(e.link) + '" target="_blank" rel="noopener">' + (atelier ? 'S’inscrire' : 'Réserver') + '</a>'
+        : '<a class="lb-b" href="' + PROGRAMME + '" target="_top">Infos</a>';
+      return '<div class="lb-next">'
+        + '<div class="lb-d" style="background:' + c[0] + ';color:' + c[1] + '"><span class="j' + (e.range ? ' r' : '') + '">' + esc(e.j) + '</span><span class="m">' + esc(e.m) + '</span></div>'
+        + '<div><div class="lb-t">' + esc(e.titre) + '<span class="lb-s">' + esc(e.sous) + '</span></div><p class="lb-q">' + esc(e.quand) + '</p></div>'
+        + btn + '</div>';
+    }).join('');
+  }
+
+  function envoyer() { parent.postMessage({ lbProchains: document.documentElement.scrollHeight }, '*'); }
+  window.addEventListener('load', envoyer);
+  window.addEventListener('resize', envoyer);
+  if (window.ResizeObserver) new ResizeObserver(envoyer).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(envoyer);
+})();
+</script>
+</body>
+</html>
