@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Barak — Programme 2026-2027</title>
+<style>html,body{margin:0;padding:0;background:#F2EDE6;}body{padding:0 0 8px;}</style>
+</head>
+<body>
 <!--
   LA BARAK — Programme 26-27 (accordéon avec affiche + description)
   À coller dans un widget "Embed" > Code > HTML de Carrd.
@@ -450,3 +459,19 @@
   }, true);
 })();
 </script>
+
+<script>
+// Envoie la hauteur de la page au site Carrd pour que l'iframe s'ajuste toute seule
+(function () {
+  function envoyer() {
+    var h = document.documentElement.scrollHeight;
+    parent.postMessage({ lbHeight: h }, '*');
+  }
+  window.addEventListener('load', envoyer);
+  window.addEventListener('resize', envoyer);
+  if (window.ResizeObserver) new ResizeObserver(envoyer).observe(document.body);
+  document.addEventListener('toggle', function () { setTimeout(envoyer, 50); }, true);
+})();
+</script>
+</body>
+</html>
